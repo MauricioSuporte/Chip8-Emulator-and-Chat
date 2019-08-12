@@ -1,0 +1,185 @@
+<html>
+	<head>
+		<title> Cuiaboy</title>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+	</head>
+	
+<body>
+
+<div id="cuiaboy"> <p id="p">Cuiaboy</p><p id="pr"></p></div> 
+<br>
+<br>
+<div id="messageBox">
+</div>
+<div id="holder">
+	<form id="messageForm">
+    <input type="text" id="userName" placeholder="Digite seu nome"/>
+		<input type="text" id="messageInput" placeholder="Digite algo..."/>
+		<button type="submit"  id="btn" onclick="hidel()"> Enviar </button>
+	</form>
+	<div class="chat" id="chat" style="overflow-y:scroll; height:400px;">
+</div>
+</body>
+
+<script>
+	$(function(){
+		var socket = io.connect();  //conecta com socket
+		var $messageForm = $("#messageForm"); //referencia para a div message form
+		var $messageInput = $("#messageInput"); //referencia para input box com id message
+    var $userName = $("#userName"); //referencia para input box com id userName
+		var $chat = $("#chat"); //referencia para div chat
+		var test = $messageInput.val("");
+
+		$messageForm.submit(function(e){
+			e.preventDefault();
+
+      var author = $userName.val();
+      var message = $messageInput.val();
+
+      var messageObject = {
+        author: author,
+        message: message,
+      };
+
+      socket.emit('sendMessage', messageObject);
+			$messageInput.val("");
+		});
+
+    socket.on("newMessage", data => {
+        $chat.append('<br>'  +'<div id="circle" style="font-weight: bold;"> <center>' + data.author + '<textarea id="t" readonly>' + data.message + '</textarea>'+' </div>' + '<br>' );
+    });
+	});
+
+	showlog = false;
+	window.setInterval(function() {
+	if(showlog == false){
+	  var chat = document.getElementById("chat");
+	  chat.scrollTop = chat.scrollHeight;
+	  }
+	}, 4);
+
+	function showl(){
+		showlog = true;
+	}
+
+	function hidel(){
+		var chat = document.getElementById("chat");
+		  chat.scrollTop = chat.scrollHeight;
+		showlog = false;
+	}
+</script>
+
+<style>
+	body{
+		background-color: black;
+	}
+
+	#p{
+		margin-top:9px;
+	}
+
+	#pr{
+		font-size:12px;
+		margin-top:-34px;
+		margin-left: 82px;
+	}
+
+	#cuiaboy{
+		background-color:#0000b3;
+		font-family: verdana;
+		color:white;
+		font-size: 30px;
+		text-align:center;
+		border: 2px solid white;
+		border-radius:15px;
+		width:190px;
+		height:60px;
+	}
+
+	#btn{
+    margin-left: 1250px;
+    position: absolute;
+    bottom: 55;
+		background-color: #0000b3;
+		font-size:15px;
+		font-family: Verdana;
+		color:white;
+		width:65px;
+		height:51px;
+		text-align: center;
+		border-radius:10px;
+		outline:none;
+		border: 2px solid white;
+	}
+
+	#messageInput{
+    position: absolute;
+    bottom: 55;
+		margin-left: 950px;
+		text-align:center;
+		border-radius:10px;
+		outline:none;
+		shadow:none;
+		font-size:15px;
+		font-family: Verdana;
+		color:black;
+		width:250px;
+		height:50px;
+	}
+
+  #userName{
+    position: absolute;
+    bottom: 115;
+    margin-left: 950px;
+    margin-top: 0px;
+    text-align:center;
+    border-radius:10px;
+    outline:none;
+    shadow:none;
+    font-size:15px;
+    font-family: Verdana;
+    color:black;
+    width:250px;
+    height:50px;
+  }
+
+	#t {
+    position: absolute;
+    left: 40;
+		text-align:left;
+		font-size:15px;
+		font-family: Verdana;
+		color:black;
+		border: 2px solid black;
+		margin-top: -10px;
+		margin-left: 72px;
+		width:200px;
+		height:55px;
+		background-color:white;
+		border-radius:12px;
+		resize: none;
+		outline: none;
+	}
+
+	#chat{
+    position: absolute;
+    top: 70;
+    margin-left: 930px;
+		border: 6px solid white;
+		width:370px;
+		background-color:#0000b3;
+		border-radius: 10px;
+	}
+
+	#circle{
+		width:100px;
+		height:40px;
+		border-radius:50px;
+    text-align:center;
+		margin-left:5px;
+		background-color:green;
+	}
+
+</style>
+</html>	
