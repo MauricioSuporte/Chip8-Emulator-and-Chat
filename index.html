@@ -18,7 +18,7 @@
 		<input type="text" id="messageInput" placeholder="Digite algo..."/>
 		<button type="submit"  id="btn" onclick="hidel()"> Enviar </button>
 	</form>
-	<div class="chat" id="chat" style="overflow-y:scroll; height:400px;">
+	<div class="chat" id="chat">
 </div>
 </body>
 
@@ -56,18 +56,19 @@
 	if(showlog == false){
 	  var chat = document.getElementById("chat");
 	  chat.scrollTop = chat.scrollHeight;
+	  showlog = true;
 	  }
 	}, 4);
 
-	function showl(){
-		showlog = true;
-	}
+	//function showl(){
+	//	showlog = true;
+	//}
 
-	function hidel(){
-		var chat = document.getElementById("chat");
-		  chat.scrollTop = chat.scrollHeight;
-		showlog = false;
-	}
+	//#function hidel(){
+	//	var chat = document.getElementById("chat");
+	//	  chat.scrollTop = chat.scrollHeight;
+	//	showlog = true;
+	//}
 </script>
 
 <style>
@@ -98,15 +99,15 @@
 	}
 
 	#btn{
-    margin-left: 1250px;
+    margin-left: 94%;
     position: absolute;
-    bottom: 55;
+    bottom: 8%;
 		background-color: #0000b3;
 		font-size:15px;
 		font-family: Verdana;
 		color:white;
-		width:65px;
-		height:51px;
+		width:5%;
+		height:5%;
 		text-align: center;
 		border-radius:10px;
 		outline:none;
@@ -116,7 +117,7 @@
 	#messageInput{
     position: absolute;
     bottom: 55;
-		margin-left: 950px;
+		margin-left: 78%;
 		text-align:center;
 		border-radius:10px;
 		outline:none;
@@ -124,14 +125,14 @@
 		font-size:15px;
 		font-family: Verdana;
 		color:black;
-		width:250px;
+		width:15%;
 		height:50px;
 	}
 
   #userName{
     position: absolute;
     bottom: 115;
-    margin-left: 950px;
+    margin-left: 78%;
     margin-top: 0px;
     text-align:center;
     border-radius:10px;
@@ -140,7 +141,7 @@
     font-size:15px;
     font-family: Verdana;
     color:black;
-    width:250px;
+    width:15%;
     height:50px;
   }
 
@@ -164,12 +165,14 @@
 
 	#chat{
     position: absolute;
-    top: 70;
-    margin-left: 930px;
+    top: 3%;
+    margin-left: 78%;
 		border: 6px solid white;
-		width:370px;
+		width:20%;
 		background-color:#0000b3;
 		border-radius: 10px;
+		overflow-y:scroll;
+		height:77%;
 	}
 
 	#circle{
