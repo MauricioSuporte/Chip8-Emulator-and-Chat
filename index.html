@@ -6,6 +6,7 @@
 	</head>
 	
 <body>
+<canvas width="160" height="144"></canvas>
 
 <div id="cuiaboy"> <p id="p">Cuiaboy</p><p id="pr"></p></div> 
 <br>
@@ -20,6 +21,84 @@
 	</form>
 	<div class="chat" id="chat">
 </div>
+
+
+
+	<script>
+		//Tela Emulador
+		var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39;
+		var moveEsquerda = false, moveDireita = false, moveCima = false, moveBaixo = false;
+		var cnv = document.querySelector("canvas");
+		var ctx = cnv.getContext("2d");
+		var p1 = {
+			x: 10,
+			y: 10
+		};
+
+		update();
+
+		window.addEventListener("keydown", keydownHandler);
+		window.addEventListener("keyup", keyupHandler);
+
+		function keydownHandler(e){
+			var key = e.keyCode;
+			if(key === LEFT && key !== RIGHT){
+				moveEsquerda = true;
+			}
+			if(key === RIGHT && key !== LEFT){
+				moveDireita = true;
+			}
+			if(key === UP && key !== DOWN){
+				moveCima = true;
+			}
+			if(key === DOWN && key !== UP){
+				moveBaixo = true;
+			}
+		}
+
+		function keyupHandler(e){
+			var key = e.keyCode;
+			if(key === LEFT && key !== RIGHT){
+				moveEsquerda = false;
+			}
+			if(key === RIGHT && key !== LEFT){
+				moveDireita = false;
+			}
+			if(key === UP && key !== DOWN){
+				moveCima = false;
+			}
+			if(key === DOWN && key !== UP){
+				moveBaixo = false;
+			}
+		}
+
+		function move(){
+			if(moveEsquerda){
+				p1.x--;
+			}
+			if(moveDireita){
+				p1.x++;
+			}
+			if(moveCima){
+				p1.y--;
+			}
+			if(moveBaixo){
+				p1.y++;
+			}
+		}
+
+		function render(){
+			ctx.clearRect(0, 0, cnv.width, cnv.height);
+			ctx.fillRect(p1.x, p1.y, 50, 50);
+		}
+
+		function update(){
+			requestAnimationFrame(update, cnv);
+			move();
+			render();
+		}
+	</script>
+
 </body>
 
 <script>
@@ -56,24 +135,13 @@
 	if(showlog == false){
 	  var chat = document.getElementById("chat");
 	  chat.scrollTop = chat.scrollHeight;
-	  showlog = true;
 	  }
 	}, 4);
-
-	//function showl(){
-	//	showlog = true;
-	//}
-
-	//#function hidel(){
-	//	var chat = document.getElementById("chat");
-	//	  chat.scrollTop = chat.scrollHeight;
-	//	showlog = true;
-	//}
 </script>
 
 <style>
 	body{
-		background-color: black;
+		background-color: #000066;
 	}
 
 	#p{
@@ -116,7 +184,7 @@
 
 	#messageInput{
     position: absolute;
-    bottom: 55;
+    bottom: 1%;
 		margin-left: 78%;
 		text-align:center;
 		border-radius:10px;
@@ -131,7 +199,7 @@
 
   #userName{
     position: absolute;
-    bottom: 115;
+    bottom: 10%;
     margin-left: 78%;
     margin-top: 0px;
     text-align:center;
@@ -166,14 +234,19 @@
 	#chat{
     position: absolute;
     top: 3%;
-    margin-left: 78%;
+    margin-left: 73%;
 		border: 6px solid white;
-		width:20%;
+		width:25%;
 		background-color:#0000b3;
 		border-radius: 10px;
 		overflow-y:scroll;
 		height:77%;
 	}
+
+	::-webkit-scrollbar { 
+		display: none;
+	}
+
 
 	#circle{
 		width:100px;
@@ -182,6 +255,13 @@
     text-align:center;
 		margin-left:5px;
 		background-color:green;
+	}
+
+	canvas{
+		border: solid 1px;
+		position: absolute;
+    	bottom: 40%;
+		margin-left: 40%;
 	}
 
 </style>
