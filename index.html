@@ -36,13 +36,17 @@
         var author = $userName.val();
         var message = $messageInput.val();
 
-        var messageObject = {
-          author: author,
-          message: message,
-        };
+        if (author.length && message.length){
+          var messageObject = {
+            author: author,
+            message: message,
+          };
+          
+          socket.emit('sendMessage', messageObject);
+          $messageInput.val("");
+        }
 
-        socket.emit('sendMessage', messageObject);
-        $messageInput.val("");
+
   		});
 
       socket.on("newMessage", data => {
