@@ -20,7 +20,7 @@
     	<div class="chat" id="chat">
     </div>
   </body>
-  
+
   <script>
   	$(function(){
   		var socket = io.connect();  //conecta com socket
@@ -42,91 +42,91 @@
         };
 
         socket.emit('sendMessage', messageObject);
-          $messageInput.val("");
-  		  });
+        $messageInput.val("");
+  		});
 
-        socket.on("newMessage", data => {
-          $chat.append('<br>'  +'<div id="circle" style="font-weight: bold;"> <center>' + data.author + '<textarea id="t" readonly>' + data.message + '</textarea>'+' </div>' + '<br>' );
-        });
+      socket.on("newMessage", data => {
+        $chat.append('<br>'  +'<div id="circle" style="font-weight: bold;"> <center>' + data.author + '<textarea id="t" readonly>' + data.message + '</textarea>'+' </div>' + '<br>' );
+      });
 
-        window.setInterval(function() {
-          var chat = document.getElementById("chat");
-          chat.scrollTop = chat.scrollHeight;
-        });
+      window.setInterval(function() {
+        var chat = document.getElementById("chat");
+        chat.scrollTop = chat.scrollHeight;
+      });
 
 
-        //Tela Emulador
-        var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39;
-        var moveEsquerda = false, moveDireita = false, moveCima = false, moveBaixo = false;
-        var cnv = document.querySelector("canvas");
-        var ctx = cnv.getContext("2d");
-        var p1 = {
-          x: 10,
-          y: 10
-        };
+      //Tela Emulador
+      var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39;
+      var moveEsquerda = false, moveDireita = false, moveCima = false, moveBaixo = false;
+      var cnv = document.querySelector("canvas");
+      var ctx = cnv.getContext("2d");
+      var p1 = {
+        x: 10,
+        y: 10
+      };
 
-        update();
+      update();
 
-        window.addEventListener("keydown", keydownHandler);
-        window.addEventListener("keyup", keyupHandler);
+      window.addEventListener("keydown", keydownHandler);
+      window.addEventListener("keyup", keyupHandler);
 
-        function keydownHandler(e){
-          var key = e.keyCode;
-          if(key === LEFT && key !== RIGHT){
-            moveEsquerda = true;
-          }
-          if(key === RIGHT && key !== LEFT){
-            moveDireita = true;
-          }
-          if(key === UP && key !== DOWN){
-            moveCima = true;
-          }
-          if(key === DOWN && key !== UP){
-            moveBaixo = true;
-          }
+      function keydownHandler(e){
+        var key = e.keyCode;
+        if(key === LEFT && key !== RIGHT){
+          moveEsquerda = true;
         }
-
-        function keyupHandler(e){
-          var key = e.keyCode;
-          if(key === LEFT && key !== RIGHT){
-            moveEsquerda = false;
-          }
-          if(key === RIGHT && key !== LEFT){
-            moveDireita = false;
-          }
-          if(key === UP && key !== DOWN){
-            moveCima = false;
-          }
-          if(key === DOWN && key !== UP){
-            moveBaixo = false;
-          }
+        if(key === RIGHT && key !== LEFT){
+          moveDireita = true;
         }
-
-        function move(){
-          if(moveEsquerda){
-            p1.x--;
-          }
-          if(moveDireita){
-            p1.x++;
-          }
-          if(moveCima){
-            p1.y--;
-          }
-          if(moveBaixo){
-            p1.y++;
-          }
+        if(key === UP && key !== DOWN){
+          moveCima = true;
         }
-
-        function render(){
-          ctx.clearRect(0, 0, cnv.width, cnv.height);
-          ctx.fillRect(p1.x, p1.y, 50, 50);
+        if(key === DOWN && key !== UP){
+          moveBaixo = true;
         }
+      }
 
-        function update(){
-          requestAnimationFrame(update, cnv);
-          move();
-          render();
+      function keyupHandler(e){
+        var key = e.keyCode;
+        if(key === LEFT && key !== RIGHT){
+          moveEsquerda = false;
         }
+        if(key === RIGHT && key !== LEFT){
+          moveDireita = false;
+        }
+        if(key === UP && key !== DOWN){
+          moveCima = false;
+        }
+        if(key === DOWN && key !== UP){
+          moveBaixo = false;
+        }
+      }
+
+      function move(){
+        if(moveEsquerda){
+          p1.x--;
+        }
+        if(moveDireita){
+          p1.x++;
+        }
+        if(moveCima){
+          p1.y--;
+        }
+        if(moveBaixo){
+          p1.y++;
+        }
+      }
+
+      function render(){
+        ctx.clearRect(0, 0, cnv.width, cnv.height);
+        ctx.fillRect(p1.x, p1.y, 50, 50);
+      }
+
+      function update(){
+        requestAnimationFrame(update, cnv);
+        move();
+        render();
+      } 
     });
   </script>
 
