@@ -57,15 +57,17 @@
     socket.on("newMessage", data => {
         $chat.append('<br>'  +'<div id="circle" style="font-weight: bold;"> <center>' + data.author + '<textarea id="t" readonly>' + data.message + '</textarea>'+' </div>' + '<br>' );
     });
-	});
 
-	showlog = false;
-	window.setInterval(function() {
-	if(showlog == false){
-	  var chat = document.getElementById("chat");
-	  chat.scrollTop = chat.scrollHeight;
-	  }
-	}, 4);
+
+
+
+    showlog = false;
+  window.setInterval(function() {
+  if(showlog == false){
+    var chat = document.getElementById("chat");
+    chat.scrollTop = chat.scrollHeight;
+    }
+  }, 4);
 
 
     //Tela Emulador
@@ -140,10 +142,7 @@
       move();
       render();
     }
-
-
-
-
+	});
 </script>
 
 <style>
