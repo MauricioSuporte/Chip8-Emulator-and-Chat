@@ -21,13 +21,17 @@ io.sockets.on("connection", function(socket){
 	
 	//desconexão
 	socket.on("disconnect", function(data){
-	memers.splice(memers.indexOf(socket.username), 1); //acessa o array de usuários
-	memeConnections.splice(memeConnections.indexOf(socket),1);
-	console.log("Usuário conectado. Total de usuários: %s ", memeConnections.length);
+  	memers.splice(memers.indexOf(socket.username), 1); //acessa o array de usuários
+  	memeConnections.splice(memeConnections.indexOf(socket),1);
+  	console.log("Usuário conectado. Total de usuários: %s ", memeConnections.length);
 	});
 
   socket.on("sendMessage", data => { 
     console.log(data);//Mostra o que os usuários escrevem no console
     io.sockets.emit("newMessage", data);
+  });
+
+  socket.on("atualizaEmulador", data => { 
+    io.sockets.emit("newAtualiza", data);
   });
 });
