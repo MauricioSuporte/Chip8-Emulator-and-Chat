@@ -25,78 +25,7 @@
 
 
 	<script>
-		//Tela Emulador
-		var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39;
-		var moveEsquerda = false, moveDireita = false, moveCima = false, moveBaixo = false;
-		var cnv = document.querySelector("canvas");
-		var ctx = cnv.getContext("2d");
-		var p1 = {
-			x: 10,
-			y: 10
-		};
 
-		update();
-
-		window.addEventListener("keydown", keydownHandler);
-		window.addEventListener("keyup", keyupHandler);
-
-		function keydownHandler(e){
-			var key = e.keyCode;
-			if(key === LEFT && key !== RIGHT){
-				moveEsquerda = true;
-			}
-			if(key === RIGHT && key !== LEFT){
-				moveDireita = true;
-			}
-			if(key === UP && key !== DOWN){
-				moveCima = true;
-			}
-			if(key === DOWN && key !== UP){
-				moveBaixo = true;
-			}
-		}
-
-		function keyupHandler(e){
-			var key = e.keyCode;
-			if(key === LEFT && key !== RIGHT){
-				moveEsquerda = false;
-			}
-			if(key === RIGHT && key !== LEFT){
-				moveDireita = false;
-			}
-			if(key === UP && key !== DOWN){
-				moveCima = false;
-			}
-			if(key === DOWN && key !== UP){
-				moveBaixo = false;
-			}
-		}
-
-		function move(){
-			if(moveEsquerda){
-				p1.x--;
-			}
-			if(moveDireita){
-				p1.x++;
-			}
-			if(moveCima){
-				p1.y--;
-			}
-			if(moveBaixo){
-				p1.y++;
-			}
-		}
-
-		function render(){
-			ctx.clearRect(0, 0, cnv.width, cnv.height);
-			ctx.fillRect(p1.x, p1.y, 50, 50);
-		}
-
-		function update(){
-			requestAnimationFrame(update, cnv);
-			move();
-			render();
-		}
 	</script>
 
 </body>
@@ -137,11 +66,89 @@
 	  chat.scrollTop = chat.scrollHeight;
 	  }
 	}, 4);
+
+
+    //Tela Emulador
+    var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39;
+    var moveEsquerda = false, moveDireita = false, moveCima = false, moveBaixo = false;
+    var cnv = document.querySelector("canvas");
+    var ctx = cnv.getContext("2d");
+    var p1 = {
+      x: 10,
+      y: 10
+    };
+
+    update();
+
+    window.addEventListener("keydown", keydownHandler);
+    window.addEventListener("keyup", keyupHandler);
+
+    function keydownHandler(e){
+      var key = e.keyCode;
+      if(key === LEFT && key !== RIGHT){
+        moveEsquerda = true;
+      }
+      if(key === RIGHT && key !== LEFT){
+        moveDireita = true;
+      }
+      if(key === UP && key !== DOWN){
+        moveCima = true;
+      }
+      if(key === DOWN && key !== UP){
+        moveBaixo = true;
+      }
+    }
+
+    function keyupHandler(e){
+      var key = e.keyCode;
+      if(key === LEFT && key !== RIGHT){
+        moveEsquerda = false;
+      }
+      if(key === RIGHT && key !== LEFT){
+        moveDireita = false;
+      }
+      if(key === UP && key !== DOWN){
+        moveCima = false;
+      }
+      if(key === DOWN && key !== UP){
+        moveBaixo = false;
+      }
+    }
+
+    function move(){
+      if(moveEsquerda){
+        p1.x--;
+      }
+      if(moveDireita){
+        p1.x++;
+      }
+      if(moveCima){
+        p1.y--;
+      }
+      if(moveBaixo){
+        p1.y++;
+      }
+    }
+
+    function render(){
+      ctx.clearRect(0, 0, cnv.width, cnv.height);
+      ctx.fillRect(p1.x, p1.y, 50, 50);
+    }
+
+    function update(){
+      requestAnimationFrame(update, cnv);
+      move();
+      render();
+    }
+
+
+
+
 </script>
 
 <style>
 	body{
-		background-color: #000066;
+		background-color: black;
 	}
 
 	#p{
@@ -251,6 +258,7 @@
 	#circle{
 		width:100px;
 		height:40px;
+    border: 1px solid black;
 		border-radius:50px;
     text-align:center;
 		margin-left:5px;
@@ -258,10 +266,12 @@
 	}
 
 	canvas{
-		border: solid 1px;
+		border: solid 6px;
 		position: absolute;
-    	bottom: 40%;
+    bottom: 40%;
 		margin-left: 40%;
+    border: 2px solid white;
+    background-color: #0000b3;
 	}
 
 </style>
