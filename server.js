@@ -4,8 +4,8 @@ var server = require("http").createServer(app);
 var io = require("socket.io").listen(server);
 //seta variáveis
 
-memers = []; //array de usuários
-memeConnections = []; //array de conexão
+usuarios = []; //array de usuários
+conexoes = []; //array de conexão
 
 server.listen(process.env.PORT || 3000);  //Porta local
 console.log("Server Online");
@@ -16,14 +16,14 @@ app.get("/", function(req, res){
 	
 io.sockets.on("connection", function(socket){
 	//conexão
-	memeConnections.push(socket);
-	console.log("Usuário desconectado. Total de usuários: %s", memeConnections.length);
+	conexoes.push(socket);
+	console.log("Usuário desconectado. Total de usuários: %s", conexoes.length);
 	
 	//desconexão
 	socket.on("disconnect", function(data){
-  	memers.splice(memers.indexOf(socket.username), 1); //acessa o array de usuários
-  	memeConnections.splice(memeConnections.indexOf(socket),1);
-  	console.log("Usuário conectado. Total de usuários: %s ", memeConnections.length);
+  	usuarios.splice(usuarios.indexOf(socket.username), 1); //acessa o array de usuários
+  	conexoes.splice(conexoes.indexOf(socket),1);
+  	console.log("Usuário conectado. Total de usuários: %s ", conexoes.length);
 	});
 
   socket.on("sendMessage", data => { 
@@ -31,7 +31,11 @@ io.sockets.on("connection", function(socket){
     io.sockets.emit("newMessage", data);
   });
 
-  socket.on("atualizaEmulador", data => { 
-    io.sockets.emit("newAtualiza", data);
-  });
+  socket.on('mouse',
+    function(data) {
+      console.log("Received: 'mouse' " + data.x + " " + data.y);
+      socket.broadcast.emit('mouse', data);
+
+    }
+  );
 });
