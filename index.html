@@ -26,7 +26,8 @@
     </div>
   </body>
 
-  <script>     
+  <script>
+  var tecla = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];     
     var socket = io.connect();  //conecta com socket
     $(function(){
       var $messageForm = $("#messageForm"); //referencia para a div message form
@@ -81,35 +82,35 @@
     }
 
     function mouseDragged() {
-    	
-    	loadPixels();
+      
+      loadPixels();
 
-		//Manipulacao do array
-		var cor = 63;
-		var y = 0;
-		var x = 0;
+    //Manipulacao do array
+    var cor = 63;
+    var y = 0;
+    var x = 0;
     var w = 0;
-		while(y < height){ //Percorrendo y
-			while(x < width){ //Percorrendo x
-				var index = (x + y * width) * 4;
+    while(y < height){ //Percorrendo y
+      while(x < width){ //Percorrendo x
+        var index = (x + y * width) * 4;
         while(w < 16){ //Pintando cada pixel
           pixels[index+w] = cor;
           w++;
         }
         w = 0;
-		    pixels[index+3] = 255;
-		    pixels[index+7] = 255;
+        pixels[index+3] = 255;
+        pixels[index+7] = 255;
         pixels[index+11] = 255;
         pixels[index+15] = 255;
-			  cor = cor + 63;
-				if(cor == 315){ //Trocando a cor do pixel
-					cor = 63;
-				}
-				x = x + 4;
-			}
-			x = 0;
-			y = y + 4;
-		}
+        cor = cor + 63;
+        if(cor == 315){ //Trocando a cor do pixel
+          cor = 63;
+        }
+        x = x + 4;
+      }
+      x = 0;
+      y = y + 4;
+    }
 
 
     var cor = 63;
@@ -191,7 +192,7 @@
     }
 
 
-		updatePixels();
+    updatePixels();
 
 
       fill(255);
@@ -215,11 +216,11 @@
     //Lendo teclas
     window.addEventListener("keydown", keydownHandler);
     function keydownHandler(e){
-      var tecla = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      
       var key = e.keyCode;
       if(key === 49){
-        console.log(tecla[0]);
         tecla[0] = 1;
+        console.log(tecla[0]);
       }
       if(key === 50){
         tecla[1] = 1;
@@ -266,6 +267,7 @@
       if(key === 86){
         tecla[15] = 1;
       }
+      console.log(tecla[0]);
     }
   </script>
 
