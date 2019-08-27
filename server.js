@@ -17,6 +17,9 @@ app.get('/tela', function(req,res)
 {
 	io.sockets.emit("frame",req.query.screen);
 	res.send("ok");
+	setTimeout(() => {
+		console.log
+	}, 3000);
 });
 app.get('/joga', function(req,res)
 {
