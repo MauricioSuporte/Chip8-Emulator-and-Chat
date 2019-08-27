@@ -108,6 +108,13 @@
       socket.emit('mouse',data);
     }
 
+
+    function sleep(ms){
+    return new Promise(resolve=>{
+        setTimeout(resolve,ms)
+    })
+    }
+
     //Lendo teclas
     window.addEventListener("keydown", keydownHandler);
     function keydownHandler(e){
@@ -166,27 +173,31 @@
     }
 
     function draw(){
-      loadPixels();
-        //Manipulacao do array
-          for(var y = 0; y < height; y++){
-            for (var x = 0; x < width; x++){
-              var index = (x + y * width) * 4;
-              var rand = random(255)
-                if(rand < 120){
-                  pixels[index+0] = 0;
-                  pixels[index+1] = 0;
-                  pixels[index+2] = 0;
-                  pixels[index+3] = 255;
-                }
-                if(rand >= 120){
-                  pixels[index+0] = 255;
-                  pixels[index+1] = 255;
-                  pixels[index+2] = 255;
-                  pixels[index+3] = 255;
-                }
-            }
+      socket.on("frame", function(data)
+      {
+        loadPixels();
+    
+        var cont = 0;
+        for(var y = 0; y < height; y++){
+          for (var x = 0; x < width; x++){
+            var index = (x + y * width) * 4;
+              if(data[cont] === "1"){
+                pixels[index+0] = 0;
+                pixels[index+1] = 0;
+                pixels[index+2] = 0;
+                pixels[index+3] = 255;
+              }
+              if(data[cont] == "0"){
+                pixels[index+0] = 255;
+                pixels[index+1] = 255;
+                pixels[index+2] = 255;
+                pixels[index+3] = 255;
+              }
+              cont++;
           }
-      updatePixels();
+        }
+        updatePixels();
+      })
     }
 
   </script>
@@ -312,8 +323,8 @@
     canvas{
       border: solid 6px;
       position: absolute;
-      top: 5%;
-      margin-left: 20%;
+      top: 50%;
+      margin-left: 40%;
       border: 2px solid white;
       background-color: #0000b3;
     }
