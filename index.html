@@ -66,9 +66,13 @@
     });
 
     function setup() {
-      createCanvas(640, 576);//Escala de 4x para a resolução real do gameboy
+      createCanvas(64, 32);//Escala de 4x para a resolução real do gameboy
       pixelDensity(1);
       background(0);
+
+      loadPixels();
+
+    //Manipulacao do array
 
 
       socket.on('mouse',
@@ -83,116 +87,7 @@
 
     function mouseDragged() {
       
-      loadPixels();
 
-    //Manipulacao do array
-    var cor = 63;
-    var y = 0;
-    var x = 0;
-    var w = 0;
-    while(y < height){ //Percorrendo y
-      while(x < width){ //Percorrendo x
-        var index = (x + y * width) * 4;
-        while(w < 16){ //Pintando cada pixel
-          pixels[index+w] = cor;
-          w++;
-        }
-        w = 0;
-        pixels[index+3] = 255;
-        pixels[index+7] = 255;
-        pixels[index+11] = 255;
-        pixels[index+15] = 255;
-        cor = cor + 63;
-        if(cor == 315){ //Trocando a cor do pixel
-          cor = 63;
-        }
-        x = x + 4;
-      }
-      x = 0;
-      y = y + 4;
-    }
-
-
-    var cor = 63;
-    var y = 1;
-    var x = 0;
-    var w = 0;
-    while(y < height){ //Percorrendo y
-      while(x < width){ //Percorrendo x
-        var index = (x + y * width) * 4;
-        while(w < 16){ //Pintando cada pixel
-          pixels[index+w] = cor;
-          w++;
-        }
-        w = 0;
-        pixels[index+3] = 255;
-        pixels[index+7] = 255;
-        pixels[index+11] = 255;
-        pixels[index+15] = 255;
-        cor = cor + 63;
-        if(cor == 315){ //Trocando a cor do pixel
-          cor = 63;
-        }
-        x = x + 4;
-      }
-      x = 0;
-      y = y + 4;
-    }
-
-    var cor = 63;
-    var y = 2;
-    var x = 0;
-    var w = 0;
-    while(y < height){ //Percorrendo y
-      while(x < width){ //Percorrendo x
-        var index = (x + y * width) * 4;
-        while(w < 16){ //Pintando cada pixel
-          pixels[index+w] = cor;
-          w++;
-        }
-        w = 0;
-        pixels[index+3] = 255;
-        pixels[index+7] = 255;
-        pixels[index+11] = 255;
-        pixels[index+15] = 255;
-        cor = cor + 63;
-        if(cor == 315){ //Trocando a cor do pixel
-          cor = 63;
-        }
-        x = x + 4;
-      }
-      x = 0;
-      y = y + 4;
-    }
-
-    var cor = 63;
-    var y = 3;
-    var x = 0;
-    var w = 0;
-    while(y < height){ //Percorrendo y
-      while(x < width){ //Percorrendo x
-        var index = (x + y * width) * 4;
-        while(w < 16){ //Pintando cada pixel
-          pixels[index+w] = cor;
-          w++;
-        }
-        w = 0;
-        pixels[index+3] = 255;
-        pixels[index+7] = 255;
-        pixels[index+11] = 255;
-        pixels[index+15] = 255;
-        cor = cor + 63;
-        if(cor == 315){ //Trocando a cor do pixel
-          cor = 63;
-        }
-        x = x + 4;
-      }
-      x = 0;
-      y = y + 4;
-    }
-
-
-    updatePixels();
 
 
       fill(255);
@@ -269,6 +164,31 @@
       }
       console.log(tecla[0]);
     }
+
+    function draw(){
+      loadPixels();
+        //Manipulacao do array
+          for(var y = 0; y < height; y++){
+            for (var x = 0; x < width; x++){
+              var index = (x + y * width) * 4;
+              var rand = random(255)
+                if(rand < 120){
+                  pixels[index+0] = 0;
+                  pixels[index+1] = 0;
+                  pixels[index+2] = 0;
+                  pixels[index+3] = 255;
+                }
+                if(rand >= 120){
+                  pixels[index+0] = 255;
+                  pixels[index+1] = 255;
+                  pixels[index+2] = 255;
+                  pixels[index+3] = 255;
+                }
+            }
+          }
+      updatePixels();
+    }
+
   </script>
 
   <style>
