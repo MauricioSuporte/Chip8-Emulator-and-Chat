@@ -22,10 +22,6 @@ app.get('/joga', function(req,res)
 {
 	res.send("3");
 });
-app.post("/manda/recebe",function(req,res)
-{
-
-});
 io.sockets.on("connection", function(socket){
 	//conexão
 	conexoes.push(socket);
