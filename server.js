@@ -13,9 +13,14 @@ console.log("Server Online");
 app.get("/", function(req, res){
 	res.sendFile(__dirname + "/index.html"); //sincroniza com o html deste arquivo
 });
-app.get('/printa', function(req,res)
+app.get('/tela', function(req,res)
 {
-	res.send(req.query.tela);
+	io.sockets.emit("frame",req.query.screen);
+	res.send("ok");
+});
+app.get('/joga', function(req,res)
+{
+	res.send("3");
 });
 app.post("/manda/recebe",function(req,res)
 {
