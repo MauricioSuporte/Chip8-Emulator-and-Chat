@@ -211,6 +211,62 @@
 
       socket.emit('mouse',data);
     }
+
+    //Lendo teclas
+    window.addEventListener("keydown", keydownHandler);
+    function keydownHandler(e){
+      var tecla = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      var key = e.keyCode;
+      if(key === 49){
+        console.log(tecla[0]);
+        tecla[0] = 1;
+      }
+      if(key === 50){
+        tecla[1] = 1;
+      }
+      if(key === 51){
+        tecla[2] = 1;
+      }
+      if(key === 52){
+        tecla[3] = 1;
+      }
+      if(key === 81){
+        tecla[4] = 1;
+      }
+      if(key === 87){
+        tecla[5] = 1;
+      }
+      if(key === 69){
+        tecla[6] = 1;
+      }
+      if(key === 82){
+        tecla[7] = 1;
+      }
+      if(key === 65){
+        tecla[8] = 1;
+      }
+      if(key === 83){
+        tecla[9] = 1;
+      }
+      if(key === 68){
+        tecla[10] = 1;
+      }
+      if(key === 70){
+        tecla[11] = 1;
+      }
+      if(key === 90){
+        tecla[12] = 1;
+      }
+      if(key === 88){
+        tecla[13] = 1;
+      }
+      if(key === 67){
+        tecla[14] = 1;
+      }
+      if(key === 86){
+        tecla[15] = 1;
+      }
+    }
   </script>
 
   <style>
