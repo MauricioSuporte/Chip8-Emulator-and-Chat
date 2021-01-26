@@ -1,7 +1,6 @@
-# CPU
-1 - Comando necessários para rodar:
-2 - npm install
-3 - npm install express
-4 - npm install firebase
-5 - npm install multer --save
-6 - npm i --save express bootstrap dotenv jquery
+##Comando necessários para rodar:<br />
+1 - npm install<br />
+2 - npm install express<br />
+3 - npm install firebase<br />
+4 - npm install multer --save<br />
+5 - npm i --save express bootstrap dotenv jquery
