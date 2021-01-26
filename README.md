@@ -1,6 +1,10 @@
-##Comando necessários para rodar:<br />
-1 - npm install<br />
-2 - npm install express<br />
-3 - npm install firebase<br />
-4 - npm install multer --save<br />
-5 - npm i --save express bootstrap dotenv jquery
+*Arquivos para o chat*
+
+
+1) Baixar Node: https://nodejs.org/en/
+
+2) Executar o comando 'npm install'
+
+3) Ir ao diretório onde os arquivos estão baixados e executar o comendo 'node server.js'
+
+4) Acessar o site em servidor local no navegador em 'http://localhost:3000'
